@@ -1,0 +1,46 @@
+@startuml
+allow_mixing
+actor :Player: as Player
+package models { }
+package views { }
+package controllers { }
+
+class views.ResumeView
+Player -> views.PlayerView 
+note on link
+resume()
+end note
+views.PlayerView *--> views.ResumeView
+note on link
+resume()
+end note
+
+class controllers.ResumeController
+views.ResumeView --> controllers.ResumeController
+note on link
+reset()
+end note
+
+class models.Board
+class models.Player
+class models.Turn
+class models.Game
+controllers.ResumeController -> models.Game
+note on link
+reset()
+end note
+
+models.Game *--> models.Board
+note on link
+reset()
+end note
+models.Game *--> models.Turn
+note on link
+new()
+end note
+models.Turn *--> models.Player : 2
+note on link
+new()
+end note
+models.Player -up-> models.Board
+@enduml

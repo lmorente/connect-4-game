@@ -1,0 +1,37 @@
+'''plantuml
+@startuml connect4
+top to bottom direction
+
+Class Connect4
+Class Player
+Class Turn
+Class Board
+Class Goal
+Class Piece
+Class Column
+Class Row
+Class Line
+Class Diagonal
+Class Put
+
+Connect4 *-down-> "2" Player
+Connect4 *-down-> Board
+Connect4 *-down-> Turn
+
+Player -down-> Piece
+
+Board *-down-> "1-7" Column
+Board *-down-> "1-6" Row
+
+Turn o-down-> "2" Player
+Turn *-down-> Goal
+Turn -down-> Put
+Put --> Piece
+Put --> Column
+
+Goal <|-- Line
+Goal <|-- Diagonal
+
+@enduml
+'''
+

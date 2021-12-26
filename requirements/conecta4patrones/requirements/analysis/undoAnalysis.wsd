@@ -1,0 +1,55 @@
+@startuml
+allowmixing
+actor :Player: as Player
+package models { }
+package views { }
+package controllers { }
+
+class views.PlayerView
+class views.PlayView
+class views.BoardView
+class views.MenuView
+Player -> views.PlayerView
+note on link
+undo()
+end note
+views.PlayerView -> views.PlayView
+note on link
+undo()
+end note
+views.PlayView ..> views.BoardView
+note on link
+showBoard()
+end note
+views.PlayView ..> views.MenuView
+note on link
+displayMenu()
+readInput()
+end note
+
+
+class controllers.UndoController
+views.MenuView --> controllers.UndoController
+note on link
+undo()
+endNote
+controllers.UndoController --> models.Game
+note on link
+isUndoable()
+undo()
+end note
+class models.Board
+class models.Player
+class models.Turn
+class models.Game
+
+models.Game *--> models.Board
+note on link
+setBoard()
+end note
+models.Game *--> models.Turn
+note on link
+setActivePlayer()
+end note
+models.Turn *--> models.Player
+@enduml

@@ -1,0 +1,54 @@
+@startuml
+allow_mixing
+actor :Player: as Player
+package models { }
+package views { }
+package controllers { }
+Player -> views.PlayerView
+note on link
+start()
+end note
+
+class views.PlayerView
+class views.StartView
+class views.BoardView
+views.PlayerView *--> views.StartView
+note on link
+start()
+end note
+views.StartView ..> views.BoardView
+note on link
+showStartBoard()
+end note
+
+views.StartView -> controllers.StartController
+note on link
+start()
+getActivePlayerColor()
+end note
+class controllers.StartController
+controllers.StartController --> models.Game
+note on link
+new()
+getActivePlayerColor()
+end note
+
+class models.Board
+class models.Player
+class models.Turn
+class models.Game
+models.Game *--> models.Board
+note on link
+new()
+end note
+models.Game *--> models.Turn
+note on link
+new()
+getActivePlayerColor()
+end note
+models.Turn *--> models.Player : 2
+note on link
+new()
+end note
+models.Player -up-> models.Board
+@enduml

@@ -1,0 +1,78 @@
+@startuml
+allowmixing
+actor :Player: as Player
+package models { }
+package views { }
+package controllers { }
+
+class views.PlayerView
+class views.PlayView
+class views.MenuView
+class views.BoardView
+Player -> views.PlayerView
+note on link
+play()
+end note
+views.PlayerView *--> views.PlayView
+note on link
+play()
+end note
+views.PlayView ..> views.MenuView
+note on link
+displayMenu()
+readInput()
+end note
+views.PlayView ..> views.BoardView
+note on link
+showBoard()
+end note
+
+class controllers.PlayController
+views.BoardView --> controllers.PlayController
+note on link
+getColor(Coordinate)
+end note
+views.MenuView --> controllers.PlayController
+note on link
+putToken(column)
+getPutTokenError(column)
+isBoardFull()
+getActivePlayerColor()
+end note
+controllers.PlayController --> models.Game
+note on link
+putToken(column)
+getPutTokenError(column)
+isBoardFull()
+getColor(Coordinate)
+getActivePlayerColor()
+end note
+
+
+class models.Board
+class models.Player
+class models.Turn
+class models.Game
+models.Game *--> models.Board
+note on link
+getPutTokenError(column)
+isBoardFull()
+end note
+models.Game *--> models.Turn
+note on link
+next()
+putToken(column)
+getActivePlayer()
+getActivePlayerColor()
+end note
+models.Turn *--> models.Player : 2
+note on link
+putToken(column)
+getPlayerColor()
+getPlayerToken()
+end note
+models.Player -up-> models.Board
+note on link
+putToken(column, color)
+end note
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+top to bottom direction
+state input as " "
+state choiceInput <<choice>>
+state errorInput as " "
+state correctInput as " "
+state boardShow as " "
+state connect4 <<choice>>
+[*] --> OngoingGame
+
+OngoingGame -down-> input : Player requests put token
+input --> choiceInput : Player is asked for input
+choiceInput -->  errorInput : Input is an incorrect index
+errorInput -up-> OngoingGame : Error message is shown
+choiceInput --> correctInput : Player inputs column [0-6]
+correctInput -down-> boardShow : Board is shown
+boardShow -> connect4
+connect4 --> OngoingGame : Undo allowed
+connect4 --> [*] : Is connect 4
+
+@enduml

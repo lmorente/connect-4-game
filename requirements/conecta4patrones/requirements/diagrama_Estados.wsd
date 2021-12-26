@@ -1,0 +1,18 @@
+@startuml
+top to bottom direction
+
+state action <<choice>>
+state resume <<choice>>
+[*] --> Initial
+Initial --> OngoingGame : Start game
+OngoingGame --> action : Put Token
+OngoingGame --> action : Undo
+OngoingGame --> action : Redo
+action --> OngoingGame
+action --> Conecta4 : IsConnect4
+Conecta4 --> resume 
+resume -> Initial : Resume
+resume --> Exit : Exit
+Exit --> [*]
+
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+package models { }
+package views { }
+package controllers { }
+views ..> controllers 
+controllers ..> models
+
+class views.PlayerView
+class views.StartView
+class views.PlayView
+class views.ResumeView
+class views.MenuView
+class views.BoardView
+views.PlayView ..> views.MenuView
+views.PlayerView *--> views.StartView
+views.PlayerView *--> views.PlayView
+views.PlayerView *--> views.ResumeView
+views.StartView ..> views.BoardView
+views.PlayView ..> views.BoardView
+
+abstract class controllers.Controller
+class controllers.StartController
+class controllers.PlayController
+class controllers.ResumeController
+class controllers.UndoController
+class controllers.RedoController
+controllers.StartController -up-|> controllers.Controller
+controllers.PlayController -up-|> controllers.Controller
+controllers.ResumeController -up-|> controllers.Controller
+controllers.UndoController -up-|> controllers.Controller
+controllers.RedoController -up-|> controllers.Controller
+
+class models.Board
+class models.Player
+class models.Turn
+class models.Game
+models.Game *--> models.Board
+models.Game *--> models.Turn
+models.Turn *--> models.Player : 2
+models.Player -up-> models.Board
+@enduml

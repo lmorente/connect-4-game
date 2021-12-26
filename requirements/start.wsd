@@ -1,0 +1,10 @@
+@startuml
+top to bottom direction
+state start as " "
+state title as " "
+[*] --> Initial
+Initial --> start: Player requests new game
+start --> title: Title & menu are shown
+title --> OngoingGame: Game begins
+OngoingGame --> [*]
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+top to bottom direction
+state requested as " "
+state resumeSelected <<choice>>
+[*] --> IsConnect4
+IsConnect4 --> requested : Player requests resume new game
+requested --> resumeSelected : System requests player input
+resumeSelected --> Initial : Player input is yes
+resumeSelected --> Exit: Player input is no
+Initial --> [*]
+Exit --> [*]
+@enduml

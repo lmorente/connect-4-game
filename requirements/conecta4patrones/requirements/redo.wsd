@@ -1,0 +1,16 @@
+@startuml
+top to bottom direction
+state input as " "
+state redone as " "
+state notRedone as " "
+state isRedoable <<choice>>
+[*] --> OngoingGame
+OngoingGame -> [*] : Is connect 4
+OngoingGame --> input : Player requests Redo
+input --> isRedoable : Redo is performed\nBoard is shown
+isRedoable --> redone : Is Redoable
+isRedoable --> notRedone : Not Redoable
+redone --> OngoingGame : Redo allowed\nUndo allowed\nPlay allowed
+notRedone --> OngoingGame : Undo allowed\nPlay allowed
+
+@enduml
